@@ -3,10 +3,143 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ArtistSimulator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Artist Simulator" WindowState="Maximized" Height="1000" Width="1000">
+    
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="TransparentButton">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
 
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="MyContentPresenter" 
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <!--<Setter Property="Background" Value="Transparent"/>-->
+                    <Setter Property="Foreground" Value="Gray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Background="Transparent">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition/>
+                <RowDefinition Height="1.6*"/>
+            </Grid.RowDefinitions>
+            
+            <Button Name="LoadFromPcButton"
+                    Content="Load from PC"
+                    Grid.Row="0"
+                    Style="{StaticResource TransparentButton}"/>
+            <Button Name="LoadFromLinkButton"
+                    Content="Load from link"
+                    Grid.Row="1"
+                    Visibility="Hidden"
+                    Style="{StaticResource TransparentButton}"/>
+            <Separator Grid.Row="2"/>
+            <Button Name="SaveButton"
+                    Content="Save"
+                    Grid.Row="3"
+                    Visibility="Hidden"
+                    Style="{StaticResource TransparentButton}"/>
+            <Button Name="ShareButton"
+                    Content="Share"
+                    Grid.Row="4"
+                    Visibility="Hidden"
+                    Style="{StaticResource TransparentButton}"/>
+            <Button Name="CopyToClipboardButton"
+                    Content="Copy to Clipboard"
+                    Visibility="Hidden"
+                    Grid.Row="5"
+                    Style="{StaticResource TransparentButton}"/>
+            <Separator Grid.Row="6"/>
+            <Button x:Name="CurrentModeButton"
+                    Grid.Row="7"
+                    Style="{StaticResource TransparentButton}"/>
+            <Label x:Name="MinimalPixelSizeLabel"
+                   Content="Minimal pixel size"
+                   Grid.Row="8"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White"/>
+            <Slider x:Name="PixelSizeSlider"
+                    Grid.Row="9"
+                    Minimum="10" Maximum="100"
+                    SmallChange="10" LargeChange="10"
+                    TickFrequency="10"
+                    IsSnapToTickEnabled="True"
+                    Value="100"
+                    Margin="10,0,10,0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"/>
+            <Button x:Name="ToolButton"
+                    Content="Tool: Brush"
+                    Grid.Row="10"
+                    Style="{StaticResource TransparentButton}"/>
+            <Button Name="StartButton"
+                    Content="Start" 
+                    Grid.Row="11"
+                    Style="{StaticResource TransparentButton}"/>
+            <Button Name="AnimateButton"
+                    Content="Animate" 
+                    Grid.Row="12"
+                    Visibility="Hidden"
+                    Style="{StaticResource TransparentButton}"/>
+            <Button Name="ChangeColorButton"
+                    Content="Change color" 
+                    Grid.Row="13"
+                    Visibility="Hidden"
+                    Style="{StaticResource TransparentButton}"/>
+            <Button Name="ChangeBrushButton"
+                    Content="Change brush"
+                    Grid.Row="14"
+                    Visibility="Hidden"
+                    Style="{StaticResource TransparentButton}"/>
+            <Separator Grid.Row="15"/>
+            <Button Name="DonateButton"
+                    Content="Donate"
+                    Grid.Row="16"
+                    Visibility="Hidden"
+                    Style="{StaticResource TransparentButton}"/>
+        </Grid>
+
+        <Grid x:Name="Workspace" Grid.Column="1" Background="Transparent">
+            <Image x:Name="CurrentImage"/>
+        </Grid>
     </Grid>
+
 </Window>
