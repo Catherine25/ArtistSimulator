@@ -14,7 +14,7 @@ namespace ArtistSimulator
         {
             InitializeComponent();
             Area.MinimalSize = (int)PixelSizeSlider.Value;
-            LoadFromPcButton.Click += (object sender, RoutedEventArgs e) => LoadFromFile();
+            LoadFromPcButton.Click += (object sender, RoutedEventArgs e) => LoadFromFileBtClicked();
             StartButton.Click += (object sender, RoutedEventArgs e) => Start();
             ToolButton.Click += (object sender, RoutedEventArgs e) => SwitchTool();
             CurrentModeButton.Click += (object sender, RoutedEventArgs e) => ModeSwitched();
@@ -28,7 +28,7 @@ namespace ArtistSimulator
         private void ModeSwitched()
         {
             Mode.SwitchToNext();
-            CurrentModeButton.Content = $"Mode: {Mode.CurrentMode.ToString()}";
+            CurrentModeButton.Content = $"Mode: {Mode.CurrentMode}";
         }
 
         private void SwitchTool()
@@ -40,15 +40,19 @@ namespace ArtistSimulator
         private DBitmap _writableBitmap;
         private BitmapImage _image;
 
-        private void LoadFromFile()
+        private void LoadFromFileBtClicked()
         {
             Loader loader = new Loader();
-            
-            _writableBitmap = loader.LoadWritableBitmap();
-            _image = loader.LoadImage();
-            
-            CurrentImage.Source = _image;
-            LoadFromPcButton.IsEnabled = false;
+
+            if (loader.IsFileChoosen)
+            {
+                _writableBitmap = loader.LoadWritableBitmap();
+                _image = loader.LoadImage();
+
+                CurrentImage.Source = _image;
+                LoadFromPcButton.IsEnabled = false;
+            }
+            //todo: else show something
         }
 
         private void Start()
