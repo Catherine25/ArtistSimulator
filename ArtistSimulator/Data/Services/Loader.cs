@@ -17,10 +17,16 @@ namespace ArtistSimulator.Data.Services
             };
 
             if (dlg.ShowDialog() == true)
+            {
                 _path = dlg.FileName;
+                if (_path != null)
+                    IsFileChoosen = true;
+            }
         }
 
         private string _path;
+
+        public bool IsFileChoosen { get; private set; }
 
         public Bitmap LoadWritableBitmap() => new Bitmap(_path);
 
